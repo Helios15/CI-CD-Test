@@ -28,7 +28,7 @@ jobs:
       - name: Build the project
         run: yarn build
       - name: Connect to EC2 server and restart PM2
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USER }}
@@ -37,6 +37,3 @@ jobs:
             cd dFantasy-BE/
             yarn 
             yarn build
-            yarn db:push:prod
-            pm2 restart 0
-            pm2 log 0
