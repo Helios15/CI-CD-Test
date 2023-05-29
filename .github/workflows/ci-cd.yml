@@ -35,5 +35,6 @@ jobs:
           key: ${{ secrets.AWS_SECRET_KEY}}
           script: |
             cd dFantasy-BE/
+            git pull origin main
             yarn 
             yarn build
