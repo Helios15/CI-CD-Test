@@ -34,5 +34,5 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.AWS_SECRET_KEY}}
           script: |
-            cd /CI-CD-Test/
+            cd CI-CD-Test/
             pm2 restart
