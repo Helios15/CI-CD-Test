@@ -35,4 +35,8 @@ jobs:
           key: ${{ secrets.AWS_SECRET_KEY}}
           script: |
             cd dFantasy-BE/
+            yarn 
+            yarn build
+            yarn db:push:prod
             pm2 restart 0
+            pm2 log 0
