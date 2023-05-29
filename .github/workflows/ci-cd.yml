@@ -35,4 +35,5 @@ jobs:
           key: ${{ secrets.AWS_SECRET_KEY}}
           script: |
             cd CI-CD-Test/
-            pm2 restart
+      - name: PM2 restart
+        run: pm2 restart
