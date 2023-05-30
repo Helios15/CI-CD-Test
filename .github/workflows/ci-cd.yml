@@ -21,7 +21,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '16'
       - name: Install dependencies
         run: yarn
 
@@ -36,5 +36,6 @@ jobs:
           script: |
             cd dFantasy-BE/
             git pull origin main
+            echo "machine github.com login ${{ secrets.GIT_NAME }} password ${{ secrets.GIT_SECRET_KEY }}" > ~/.netrc
             yarn 
             yarn build
