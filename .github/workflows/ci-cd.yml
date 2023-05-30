@@ -60,6 +60,7 @@ jobs:
             cd dist/
             ls -la
             yarn build
+            pm2 restart 0
 
       # - name: Build productiom
       #   uses: appleboy/ssh-action@master
