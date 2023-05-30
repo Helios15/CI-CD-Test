@@ -36,5 +36,4 @@ jobs:
           script: |
             cd dFantasy-BE/
             git -c "user.name=${{ secrets.GIT_NAME }}" -c "user.password=${{ secrets.GIT_SECRET_KEY }}" pull origin main
-            yarn 
-            yarn build
+            yarn
