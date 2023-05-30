@@ -52,6 +52,7 @@ jobs:
           key: ${{ secrets.AWS_SECRET_KEY}}
           script: |
             cd CI-CD/CI-CD-Test/
+            source ~/.nvm/nvm.sh && nvm install 16.17.0 &&  nvm use 16.17.0
             git -c "user.name=${{ secrets.GIT_NAME }}" -c "user.password=${{ secrets.GIT_SECRET_KEY }}" pull origin main
             yarn
 
@@ -63,6 +64,7 @@ jobs:
           key: ${{ secrets.AWS_SECRET_KEY}}
           script: |
             cd CI-CD/CI-CD-Test/
+            source ~/.nvm/nvm.sh && nvm install 16.17.0 &&  nvm use 16.17.0
             yarn build
 
       - name: Restart PM2
@@ -73,5 +75,6 @@ jobs:
           key: ${{ secrets.AWS_SECRET_KEY}}
           script: |
             cd CI-CD/CI-CD-Test/
+            source ~/.nvm/nvm.sh && nvm install 16.17.0 &&  nvm use 16.17.0
             pm2 restart 0
             pm2 log 0
