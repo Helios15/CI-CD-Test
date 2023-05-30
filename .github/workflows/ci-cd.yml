@@ -45,6 +45,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.AWS_SECRET_KEY}}
           script: |
+            cd CI-CD/CI-CD-Test/
             git -c "user.name=${{ secrets.GIT_NAME }}" -c "user.password=${{ secrets.GIT_SECRET_KEY }}" pull origin main
             yarn
 
@@ -55,6 +56,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.AWS_SECRET_KEY}}
           script: |
+            cd CI-CD/CI-CD-Test/
             yarn build
 
       - name: Restart PM2
@@ -64,5 +66,6 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.AWS_SECRET_KEY}}
           script: |
+            cd CI-CD/CI-CD-Test/
             pm2 restart 0
             pm2 log 0
