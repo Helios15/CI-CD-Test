@@ -35,7 +35,6 @@ jobs:
           key: ${{ secrets.AWS_SECRET_KEY}}
           script: |
             cd dFantasy-BE/
-            git pull origin main
-            echo "machine github.com login ${{ secrets.GIT_NAME }} password ${{ secrets.GIT_SECRET_KEY }}" > ~/.netrc
+            git -c "user.name=${{ secrets.GIT_NAME }}" -c "user.password=${{ secrets.GIT_SECRET_KEY }}" pull origin main
             yarn 
             yarn build
