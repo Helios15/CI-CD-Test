@@ -56,9 +56,6 @@ jobs:
             source ~/.nvm/nvm.sh && nvm install 16.17.0 &&  nvm use 16.17.0
             git -c "user.name=${{ secrets.GIT_NAME }}" -c "user.password=${{ secrets.GIT_SECRET_KEY }}" pull origin main
             yarn
-            ls -la
-            cd dist/
-            ls -la
             yarn build
             pm2 restart CI_CD-Test
 
