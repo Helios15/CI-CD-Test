@@ -27,22 +27,6 @@ jobs:
 
       - name: Build the project
         run: yarn build
-      # - name: Install NVM
-      #   run: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-      # - name: Access NVM
-      #   run: source ~/.bashrc
-      # - name: Choose node version
-      #   run: source ~/.nvm/nvm.sh && nvm install 16.17.0 &&  nvm use 16.17.0
-      # # Connect to server using appleboy/ssh-action@master, allow to ssh to server remotely
-      # - name: Set up nvm
-      #   uses: appleboy/ssh-action@master
-      #   with:
-      #     host: ${{ secrets.SERVER_IP }}
-      #     username: ${{ secrets.SERVER_USER }}
-      #     key: ${{ secrets.AWS_SECRET_KEY}}
-      #     script: |
-      #       curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-      #       source ~/.bashrc
 
       - name: Connect to server and restart PM2
         uses: appleboy/ssh-action@master
@@ -53,31 +37,8 @@ jobs:
           script: |
             cd CI-CD/CI-CD-Test/
             curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-            source ~/.nvm/nvm.sh && nvm install 16.17.0 &&  nvm use 16.17.0
+            source ~/.nvm/nvm.sh && nvm install 16.17.0 && nvm use 16.17.0
             git -c "user.name=${{ secrets.GIT_NAME }}" -c "user.password=${{ secrets.GIT_SECRET_KEY }}" pull origin main
             yarn
             yarn build
             pm2 restart CI_CD-Test
-
-      # - name: Build productiom
-      #   uses: appleboy/ssh-action@master
-      #   with:
-      #     host: ${{ secrets.SERVER_IP }}
-      #     username: ${{ secrets.SERVER_USER }}
-      #     key: ${{ secrets.AWS_SECRET_KEY}}
-      #     script: |
-      #       cd CI-CD/CI-CD-Test/
-      #       source ~/.nvm/nvm.sh && nvm install 16.17.0 &&  nvm use 16.17.0
-      #       yarn build
-
-      # - name: Restart PM2
-      #   uses: appleboy/ssh-action@master
-      #   with:
-      #     host: ${{ secrets.SERVER_IP }}
-      #     username: ${{ secrets.SERVER_USER }}
-      #     key: ${{ secrets.AWS_SECRET_KEY}}
-      #     script: |
-      #       cd CI-CD/CI-CD-Test/
-      #       source ~/.nvm/nvm.sh && nvm install 16.17.0 &&  nvm use 16.17.0
-      #       pm2 restart 0
-      #       pm2 log 0
