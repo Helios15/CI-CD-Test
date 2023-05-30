@@ -27,6 +27,7 @@ jobs:
 
       - name: Build the project
         run: yarn build
+      # Connect to server using appleboy/ssh-action@master, allow to ssh to server remotely
       - name: Connect to EC2 server and restart PM2
         uses: appleboy/ssh-action@master
         with:
@@ -34,7 +35,9 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.AWS_SECRET_KEY}}
           script: |
-            cd dFantasy-BE/
+            cd CI-CD/CI-CD-Test/
             git -c "user.name=${{ secrets.GIT_NAME }}" -c "user.password=${{ secrets.GIT_SECRET_KEY }}" pull origin main
             yarn
+            yarn build
             pm2 restart 0
+            pm2 log 0
