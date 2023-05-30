@@ -28,7 +28,17 @@ jobs:
       - name: Build the project
         run: yarn build
       # Connect to server using appleboy/ssh-action@master, allow to ssh to server remotely
-      - name: Connect to EC2 server and restart PM2
+      - name: Connect to server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.AWS_SECRET_KEY}}
+          script: |
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+            source ~/.bashrc
+
+      - name: Connect to server
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SERVER_IP }}
@@ -48,6 +58,7 @@ jobs:
           key: ${{ secrets.AWS_SECRET_KEY}}
           script: |
             yarn build
+
       - name: Restart PM2
         uses: appleboy/ssh-action@master
         with:
