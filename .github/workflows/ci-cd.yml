@@ -46,6 +46,8 @@ jobs:
           key: ${{ secrets.AWS_SECRET_KEY}}
           script: |
             cd CI-CD/CI-CD-Test/
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+            source ~/.bashrc
             nvm use 16.17.0
             git -c "user.name=${{ secrets.GIT_NAME }}" -c "user.password=${{ secrets.GIT_SECRET_KEY }}" pull origin main
             yarn
