@@ -27,6 +27,12 @@ jobs:
 
       - name: Build the project
         run: yarn build
+      - name: Install NVM
+        run: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+      - name: Access NVM
+        run: source ~/.bashrc
+      - name: Choose node version
+        run: nvm use 16.17.0
       # Connect to server using appleboy/ssh-action@master, allow to ssh to server remotely
       - name: Set up nvm
         uses: appleboy/ssh-action@master
