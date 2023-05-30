@@ -36,6 +36,7 @@ jobs:
           key: ${{ secrets.AWS_SECRET_KEY}}
           script: |
             cd CI-CD/CI-CD-Test/
+            nvm use 16.17.0
             git -c "user.name=${{ secrets.GIT_NAME }}" -c "user.password=${{ secrets.GIT_SECRET_KEY }}" pull origin main
             yarn
             yarn build
