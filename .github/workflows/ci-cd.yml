@@ -44,7 +44,7 @@ jobs:
       #       curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
       #       source ~/.bashrc
 
-      - name: Connect to server
+      - name: Connect to server and restart PM2
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SERVER_IP }}
@@ -52,6 +52,8 @@ jobs:
           key: ${{ secrets.AWS_SECRET_KEY}}
           script: |
             cd CI-CD/CI-CD-Test/
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+            source ~/.nvm/nvm.sh && nvm install 16.17.0 &&  nvm use 16.17.0
             git -c "user.name=${{ secrets.GIT_NAME }}" -c "user.password=${{ secrets.GIT_SECRET_KEY }}" pull origin main
             yarn
             yarn build
