@@ -9,10 +9,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build
+        run: yarn build
 
   Deploy:
     needs: Build
-    if: github.event.workflow_run.conclusion == 'success' && github.event_name == 'workflow_dispatch' && needs.build.result == 'success'
+    if: ${{ needs.Build.outcome == 'success'  && github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
 
     steps:
