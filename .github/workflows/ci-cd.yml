@@ -17,7 +17,7 @@ jobs:
 
   Deploy:
     needs: Build
-    if: ${{ needs.Build.outcome == 'success'  && github.event_name == 'workflow_dispatch' }}
+    # if:  needs.Build.outcome == 'success'  && github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
 
     steps:
